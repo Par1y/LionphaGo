@@ -22,14 +22,31 @@ public class UserLoginController {
 
     /**
      * 用户登录接口
-     * @param userDTO
+     * @params id username password
      * @return
      */
     @Operation(summary = "用户登录")
     @PostMapping("/login")
-    public Result userLogin(@RequestBody UserDTO userDTO){
-        log.info(userDTO.toString());
+    public Result userLogin(@RequestParam(value = "id", required = false) Long id, @RequestParam(value = "username", required = false) String username, @RequestParam("password") String password) {
+        // 判空
+        if (username == null && id == null) {
+            return Result.error("用户名或用户名为空");
+        }
+        if (password == null) {
+            return Result.error("口令为空");
+        }
+
+        UserDTO userDTO = UserDTO.builder()
+                .id(id)
+                .username(username)
+                .password(password)
+                .build();
+        // 验证
         UserVO userVO = userLoginService.login(userDTO);
+        if (userVO.getId() == null) {
+            return Result.error("账户或密码错误");
+        }
+
         return Result.success(userVO);
     }
 }
