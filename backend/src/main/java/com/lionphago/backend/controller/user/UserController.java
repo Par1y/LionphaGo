@@ -4,9 +4,11 @@ import com.lionphago.backend.common.dto.UserDTO;
 import com.lionphago.backend.common.vo.UserVO;
 import com.lionphago.backend.result.Result;
 import com.lionphago.backend.service.UserLoginService;
+import io.swagger.v3.oas.annotations.OpenAPI31;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,15 +17,15 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequestMapping("/user")
 @Tag(name = "用户相关接口")
-public class UserLoginController {
+public class UserController {
 
     @Autowired
     private UserLoginService userLoginService;
 
     /**
      * 用户登录接口
-     * @params id username password
-     * @return
+     * @params {@code id}, {@code username}, {@code password}
+     * @return {@code Result}
      */
     @Operation(summary = "用户登录")
     @PostMapping("/login")
@@ -37,7 +39,7 @@ public class UserLoginController {
         }
 
         UserDTO userDTO = UserDTO.builder()
-                .id(id)
+                .userId(id)
                 .username(username)
                 .password(password)
                 .build();
@@ -48,5 +50,11 @@ public class UserLoginController {
         }
 
         return Result.success(userVO);
+    }
+
+    @Operation(summary = "用户注册")
+    @PostMapping("/register")
+    public Result userRegister(@RequestBody UserDTO userDTO) {
+        return Result.error("这个功能还没有实现");
     }
 }
