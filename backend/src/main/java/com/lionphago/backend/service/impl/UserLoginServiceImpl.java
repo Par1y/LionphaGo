@@ -15,14 +15,14 @@ public class UserLoginServiceImpl implements UserLoginService {
     private UserMapper userMapper;
     /**
      * 用户登录
-     * @param user
-     * @return
+     * @param {@code UserDTO}
+     * @return {@code UserVO}
      */
     public UserVO login(UserDTO user) {
         UserDTO userFromDatabase = UserDTO.builder().build();
 
-        if(user.getId() != null) {
-            userFromDatabase = userMapper.selectById(user.getId());
+        if(user.getUserId() != null) {
+            userFromDatabase = userMapper.selectById(user.getUserId());
         } else if (user.getUsername() != null) {
             QueryWrapper<UserDTO> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("username", user.getUsername());
@@ -31,7 +31,7 @@ public class UserLoginServiceImpl implements UserLoginService {
 
         if (userFromDatabase.getPassword().equals(user.getPassword())) {
             return UserVO.builder()
-                    .id(userFromDatabase.getId())
+                    .id(userFromDatabase.getUserId())
                     .username(userFromDatabase.getUsername())
                     .grade(userFromDatabase.getGrade())
                     ._class(userFromDatabase.get_class())

@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f49829f4-c4d8-4da2-a8be-203fa7764bb2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/lionphago/backend/common/dto/GameDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/lionphago/backend/common/dto/RecordDTO.java" afterDir="false" />
+    <list default="true" id="f49829f4-c4d8-4da2-a8be-203fa7764bb2" name="Changes" comment="doc improve, add game&amp;recordDTO">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/lionphago/backend/service/UserRegisterService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/lionphago/backend/service/impl/UserRegisterServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/lionphago/backend/common/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/lionphago/backend/common/dto/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/lionphago/backend/common/vo/UserVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/lionphago/backend/common/vo/UserVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/lionphago/backend/controller/user/UserLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/lionphago/backend/controller/user/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/lionphago/backend/service/impl/UserLoginServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/lionphago/backend/service/impl/UserLoginServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +63,15 @@
       <option name="presentableId" value="Default" />
       <updated>1764123062933</updated>
     </task>
+    <task id="LOCAL-00001" summary="doc improve, add game&amp;recordDTO">
+      <option name="closed" value="true" />
+      <created>1764125977791</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1764125977791</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -76,5 +84,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="doc improve, add game&amp;recordDTO" />
+    <option name="LAST_COMMIT_MESSAGE" value="doc improve, add game&amp;recordDTO" />
   </component>
 </project>
