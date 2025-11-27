@@ -1,5 +1,6 @@
 package com.lionphago.backend.common.dto;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +21,8 @@ import java.util.Set;
 @Builder
 @TableName("`user`")
 public class UserDTO {
+
+    @TableId(value = "userId")
     private Long userId;  // 学号
     private String username; // 用户名
     private String password; // 口令

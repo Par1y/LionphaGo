@@ -4,12 +4,14 @@ import com.lionphago.backend.common.dto.UserDTO;
 import com.lionphago.backend.common.vo.UserVO;
 import com.lionphago.backend.result.Result;
 import com.lionphago.backend.service.UserLoginService;
+import com.lionphago.backend.service.UserRegisterService;
 import io.swagger.v3.oas.annotations.OpenAPI31;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,6 +23,8 @@ public class UserController {
 
     @Autowired
     private UserLoginService userLoginService;
+    @Autowired
+    private UserRegisterService userRegisterService;
 
     /**
      * 用户登录接口
@@ -32,7 +36,7 @@ public class UserController {
     public Result userLogin(@RequestParam(value = "id", required = false) Long id, @RequestParam(value = "username", required = false) String username, @RequestParam("password") String password) {
         // 判空
         if (username == null && id == null) {
-            return Result.error("用户名或用户名为空");
+            return Result.error("用户名或学号为空");
         }
         if (password == null) {
             return Result.error("口令为空");
@@ -55,6 +59,21 @@ public class UserController {
     @Operation(summary = "用户注册")
     @PostMapping("/register")
     public Result userRegister(@RequestBody UserDTO userDTO) {
-        return Result.error("这个功能还没有实现");
+
+        // 判空
+        if (StringUtils.hasText(userDTO.getUsername())
+                && userDTO.getUserId() != null
+                && StringUtils.hasText(userDTO.getPassword())
+                && StringUtils.hasText(userDTO.getMajor())
+                && StringUtils.hasText(userDTO.getSchool())
+                && userDTO.get_class() != null
+                && userDTO.getGrade() != null){
+            // 注册
+            UserVO userVO = userRegisterService.Register(userDTO);
+            return Result.success(userVO);
+        } else {
+            // 若有一项为空 则不通过
+            return Result.error("存在未填的信息！");
+        }
     }
 }
