@@ -5,11 +5,10 @@ import com.lionphago.backend.common.vo.UserVO;
 import com.lionphago.backend.result.Result;
 import com.lionphago.backend.service.UserLoginService;
 import com.lionphago.backend.service.UserRegisterService;
-import io.swagger.v3.oas.annotations.OpenAPI31;
+import com.lionphago.backend.service.UserEditService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +24,8 @@ public class UserController {
     private UserLoginService userLoginService;
     @Autowired
     private UserRegisterService userRegisterService;
+    @Autowired
+    private UserEditService userEditService;
 
     /**
      * 用户登录接口
@@ -49,7 +50,7 @@ public class UserController {
                 .build();
         // 验证
         UserVO userVO = userLoginService.login(userDTO);
-        if (userVO.getId() == null) {
+        if (userVO.getUserId() == null) {
             return Result.error("账户或密码错误");
         }
 
@@ -58,13 +59,12 @@ public class UserController {
 
     /**
      * 用户注册接口
-     * @param userDTO
-     * @return
+     * @param {@code userDTO}
+     * @return {@code Result}
      */
     @Operation(summary = "用户注册")
     @PostMapping("/register")
     public Result userRegister(@RequestBody UserDTO userDTO) {
-
         // 判空
         if (StringUtils.hasText(userDTO.getUsername())
                 && userDTO.getUserId() != null
@@ -80,5 +80,44 @@ public class UserController {
             // 若有一项为空 则不通过
             return Result.error("存在未填的信息！");
         }
+    }
+
+    /**
+     * 用户编辑接口
+     * @param {@code userDTO}
+     * @return {@code Result}
+     */
+    @Operation(summary = "用户编辑")
+    @PostMapping("/edit")
+    public Result userEdit(@RequestBody UserDTO userDTO) {
+        // 什么都没改啊
+        if(userDTO.getUsername().isEmpty()
+                && userDTO.getPassword().isEmpty()
+                && userDTO.getGrade().describeConstable().isEmpty()
+                && userDTO.getClassNumber().describeConstable().isEmpty()
+                && userDTO.getMajor().isBlank()
+                && userDTO.getSchool().isBlank()){
+            return Result.error("这不是什么都没改吗！");
+        }
+
+        /**
+         * 主键即学号一定要存在，
+         * 若前端省略则从session等持久化区域获取。
+         * 这里也不提供自行更改学号的功能，
+         * 更改学号的实现应该放在管理侧接口，
+         * 或在此接口中额外进行鉴权。
+         * 安全考虑，角色同理。
+          */
+        if(userDTO.getUserId().describeConstable().isEmpty()) {
+            return Result.error("缺失学号参数！");
+        }
+
+        UserVO userVO = userEditService.Edit(userDTO);
+
+        // 失败了？
+        if (userVO.getUserId() == null) {
+            return Result.error("编辑用户失败。");
+        }
+        return Result.success(userVO);
     }
 }

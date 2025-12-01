@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 @Builder
 public class UserVO {
-    private Long id;  // 学号
+    private Long userId;  // 学号
     private String username; // 用户名
     private Integer grade; // 年级
     private Integer classNumber; // 班级

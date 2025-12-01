@@ -8,6 +8,7 @@ import com.lionphago.backend.exception.UserAlreadyExsistException;
 import com.lionphago.backend.exception.UserInfoInvalidException;
 import com.lionphago.backend.mapper.UserMapper;
 import com.lionphago.backend.service.UserRegisterService;
+import com.lionphago.backend.utils.DOUtil;
 import com.lionphago.backend.utils.ShiroSHAUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,12 +55,6 @@ public class UserRegisterServiceImpl implements UserRegisterService {
         userDTO.setRoleName(List.of(RolenameConstant.STUDENT));
 
         userMapper.insert(userDTO);
-        return UserVO.builder().id(userDTO.getUserId())
-                .grade(userDTO.getGrade())
-                .major(userDTO.getMajor())
-                .classNumber(userDTO.getClassNumber())
-                .school(userDTO.getSchool())
-                .username(userDTO.getUsername())
-                .build();
+        return DOUtil.dtoToVo(userDTO);
     }
 }
