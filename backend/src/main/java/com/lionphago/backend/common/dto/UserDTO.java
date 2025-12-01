@@ -46,6 +46,6 @@ public class UserDTO {
 
     private String school; // 学院
 
-    @TableField(value = "rolename",typeHandler = StringListTypeHandler.class)
+    @TableField(value = "role_name",typeHandler = StringListTypeHandler.class)
     private List<String> roleName; // 角色
 }
