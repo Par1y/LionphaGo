@@ -29,6 +29,7 @@ public class SecurityConfig {
          */
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/user/edit").authenticated()
+//                .requestMatchers("/game/update","/game/add","/game/delete").authenticated()
                 .anyRequest().permitAll());
 
         http.formLogin(form -> form.disable());

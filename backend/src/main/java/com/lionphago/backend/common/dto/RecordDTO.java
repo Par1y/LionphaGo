@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * 获奖记录
@@ -18,5 +18,5 @@ import java.util.Set;
 public class RecordDTO {
     private Long gameId; // 赛事id
     private Long gamerId; // 获奖者学号
-    private Set<String> awards; // 奖项
+    private List<String> awards; // 奖项
 }
